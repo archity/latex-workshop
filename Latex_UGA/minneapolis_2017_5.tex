@@ -1,0 +1,1125 @@
+\documentclass[mathserif,9pt]{beamer}
+\usepackage{multimedia}
+%%\usepackage[utf8]{inputenc}
+%%\usetheme{Warsaw}
+%%\usetheme{Rochester}
+%%\usecolortheme{whale}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,filecolor=red,pdfnewwindow=true,pdffitwindow=false}
+
+\definecolor{oxygenorange}{HTML}{F7800A}
+\definecolor{oxygengray}{HTML}{686868}
+\definecolor{oxygenlightgray}{HTML}{EEEEEE}
+\definecolor{oxygenblue}{HTML}{236EAF}
+\definecolor{ox}{HTML}{111EAF}
+\definecolor{my_purple}{HTML}{ca1885}
+%%\definecolor{my_anis}{HTML}{b3ec51}
+%%\definecolor{my_anis}{HTML}{c2ed3d}
+\definecolor{my_anis}{HTML}{e3ed3d}
+\definecolor{my_tilleul}{HTML}{9a9c16}
+\definecolor{darkred}{HTML}{c21125}
+\definecolor{my_green}{HTML}{88ac0c}
+
+\definecolor{blue_bruz}{HTML}{235497}
+\definecolor{b_bruz}{HTML}{207ede}
+\definecolor{grey_bruz}{HTML}{50586d}
+\definecolor{yellow_bruz}{HTML}{b7a170}
+
+\setbeamercolor*{Title bar}{fg=white}
+
+
+\def\H{{\mathcal H}}
+\def\Hu{{\H^1}}
+\def\Comp{{\;^{c}\,}}
+\def\fint{{\int\hspace{-8mm}-}}
+
+\def\a{{\alpha }}
+\def\b{{\beta }}
+\def\d{{\delta }}
+\def\e{{\varepsilon}}
+\def\o{{\omega}}
+\def\ds{\displaystyle}
+
+\def\ha{{\hat{a}}}
+\def\hb{{\hat{b}}}
+\def\hx{{\hat{x}}}
+\def\vf{{\varphi}}
+\def\Cau{{{\cal C}^{0,\alpha}(\Gamma_1)}}
+\def\Cad{{{\cal C}^{0,\alpha}(\Gamma_2)}}
+\def\R{\mathbf R}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+
+
+\begin{document}
+\usebackgroundtemplate{}
+
+%%--------------------------------------------------------------------------------
+\begin{frame}
+
+\textcolor{b_bruz}{\bf{\Large{Homogenization and the Neumann Poincar\'e operator}}}
+\vspace*{1cm}
+
+\small{
+Eric Bonnetier, Charles Dapogny, Faouzi Triki
+\vspace*{10mm}
+
+\textcolor{blue_bruz}{\bf Outline:}
+\medskip
+
+\begin{itemize}
+\item[1.] Motivation : resonant frequencies in metallic
+nanoparticles 
+
+\item[2.]
+The NP operator/the Poincar\'e variational problem
+for a periodic collection of inclusions
+
+\item[3.]
+The limiting spectra
+
+\item[4.]
+Consequences concerning the homogenization of 
+inclusions with non-positive conductivities
+
+\item[5.]
+Conclusion
+\end{itemize}
+
+}
+\end{frame}
+%%--------------------------------------------------------------------------------
+\begin{frame}
+\small{
+
+\textcolor{b_bruz}{\Large{\bf 1. Resonant frequencies of metallic nanoparticles}}
+
+\begin{figure}[hbt]
+\includegraphics[angle=0,height=20mm]{../Transp/foiltex/nanoparticles_1.jpg}
+\hspace*{4mm}
+\includegraphics[angle=0,height=20mm]{Im_Presentation/vitrail_2}
+\end{figure}
+%%\textcolor{red}{[Gang Bi et al, Optics Comm., 285 (2012) 2472]}
+\bigskip
+
+Very small metallic particles exhibit interesting diffractive phenomena,
+related to resonances~: \textcolor{b_bruz}{localization and extremely large 
+enhancement of the electromagentic fields in their vicinity}
+\medskip
+
+Many potential applications~: \textcolor{black}{nanophotonics, 
+nanolithography, near field microscopy,  biosensors, cancer therapy}
+\medskip
+
+\textcolor{b_bruz}{\bf 2 main ingredients :}
+\begin{itemize}
+\item[-]
+The wavelength of the incident excitation should be larger than
+the particle diameter
+
+\item[-]
+the real part of the electric permittivity $\varepsilon(\omega)$ 
+inside the particle is negative 
+\end{itemize}
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+\textcolor{b_bruz}{\bf Typical model problem}
+\medskip
+
+Consider a particule that occupies a bounded  $C^2$ domain 
+\textcolor{ox}{$\delta D \subset \R^d$}
+\medskip 
+
+$\delta$ is small, $|D| = 1$
+\medskip
+
+$\omega \in \mathbf{C}$ is a resonant frequency of the nanoparticle
+$D_\delta$  if  there exists a  non-trivial solution $U$ to the PDE 
+(TE polarization):
+\medskip
+
+\textcolor{ox}{
+\[
+\left\{ \begin{array}{llccc}
+\Delta U +\omega^2 \varepsilon(x, \omega)\mu_0 U &= \;0
+&\qquad \textrm{in}& \R^d \setminus \overline{D_\delta} \cup D_\delta
+\\ 
+\left[\varepsilon U\right] &=\; 0& 
+\qquad \textrm{on}& \partial D_\delta
+\\ 
+\left[ \frac{\partial U}{\partial \nu}\right] &=\; 0& 
+\qquad \textrm{on}& \partial D_\delta
+\\
+\textrm{radiation condition}
+\end{array}\right.
+\]}
+\bigskip
+
+The Drude model gives a good description of the electric permittivity $\varepsilon$
+of metals such as Au, Ag, Al, in the range of frequencies of interest
+
+\textcolor{ox}{
+\begin{eqnarray*}
+\varepsilon(x, \omega) &=& 
+\left\{ \begin{array}{ll} 
+\varepsilon_0 &\quad \textrm{for}\;x \in \R^d \setminus \overline{D_\delta}
+\\
+\varepsilon_0 \hat \epsilon(\omega) \;=\; 
+\varepsilon_0\left(
+\varepsilon_\infty - \frac{\omega_P^2}{\omega^2+i\omega \Gamma}
+\right)
+& \quad \textrm{for}\; x \in D_\delta
+\end{array} \right.
+\end{eqnarray*}}
+
+%\end{eqnarray*}}
+%where $\varepsilon_\infty>0,~\omega_P>0$ and~$\Gamma>0$ 
+%\hat{\epsilon}(\omega) 
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+The change of variable $\quad \tilde{x} = z + x/\delta \quad$ transforms the original
+PDE into
+\textcolor{ox}{
+\[
+\left\{ \begin{array}{llcl}
+\Delta \tilde{U} + \d^2 \omega^2 \varepsilon(x, \omega)\mu_0 \tilde{U} &= \;0
+&\qquad \textrm{in}\; \R^2\setminus \overline{D} \cup D
+\\ [6pt]
+\left[\varepsilon \tilde{U}\right] &=\; 0& 
+\qquad \textrm{on}\; \partial D
+\\ [6pt]
+\left[ \frac{\partial \tilde{U}}{\partial \nu}\right] &=\; 0& 
+\qquad \textrm{on}\; \partial D
+\end{array}\right.
+\]}
+\medskip
+
+where $\quad \tilde{U}(x) = U(\tilde{x}) \quad$ and one expects
+that $\e \tilde{U}$ converges to a solution of the quasistatic problem
+\textcolor{ox}{
+\[
+\left\{ \begin{array}{ccll}
+\textrm{div}(1/\e(\omega) \nabla u) &=& 0 & \textrm{in}\; \R^d
+\\
+u& \to & 0 & \textrm{as}\;|x| \to \infty
+\end{array}\right.
+\]}
+\medskip
+
+\textcolor{ox}{
+Electrostatic resonances: find the values of $\e$ for which the above PDE 
+has non trivial solutions}
+\medskip
+
+
+
+\textcolor{red}{[Mayergoyz-Fredkin-Zhang, Grieser, Ammari-Millien-Ruiz-Zhang]} 
+
+
+
+}
+\end{frame}
+%%--------------------------------------------------------------------------------
+\begin{frame}
+\small{
+
+
+We may seek $u$ in the form 
+\textcolor{ox}{$\quad u(x)\;=\; S_{D} \vf(x) \quad$}
+where $S_D$ is the single layer potential on $\partial \Omega$
+
+\textcolor{ox}{
+\begin{eqnarray*}
+S_D \psi(x) &=& \ds\int_{\partial D} G(x,y) \psi(y) \, d\sigma(y),
+\quad x \in \R^d
+\\
+G(x,y) &=& \left\{ \begin{array}{ll}
+\ds\frac{1}{2\pi} \ln|x-y| & \textrm{if}\; d=2
+\\
+\ds\frac{|x-y|^{d-2}}{(2-d)\omega_d} & \textrm{if}\; d \geq 3
+\end{array} \right.
+\end{eqnarray*}}
+\medskip
+
+For $\psi \in L^2(\partial D)$,
+the function $S_D \psi$ is harmonic in $D$ and in $\R^d \setminus D$,
+continuous across $\partial D$ and satisfies the Pelmelj jump relations
+\textcolor{ox}{
+\begin{eqnarray*}
+\partial_\nu S_D \psi |_\pm
+&=& \pm 1/2 \psi + K^*_{D} \psi
+\end{eqnarray*}}
+\medskip
+
+The operator $K^*_{D}$ (or its adjoint) is the Neumann-Poincar\'e operator
+\textcolor{red}{
+\begin{eqnarray*}
+K^*_D \psi(x)
+&=& \ds\int_{\partial D} 
+\ds\frac{\nu(x)\cdot(x-y)}{|x-y|^2} \psi(y) \,d\sigma(y)
+\end{eqnarray*}}
+ 
+}
+\end{frame}
+%%--------------------------------------------------------------------------------
+\begin{frame}
+\small{
+
+The layer potential $\vf$ yields a solution to the PDE provided
+\textcolor{ox}{
+\begin{eqnarray*}
+(\lambda(\omega) I - K^*_D)\vf &=& 0
+\end{eqnarray*}}
+
+where \textcolor{ox}{$\quad \lambda(\omega) \;=\; \ds\frac{1/\hat{\epsilon}(\omega) + 1}
+{2(1/\hat{\epsilon}(\omega) - 1)}\quad$}
+is thus an eigenvalue of $K^*_D$
+\bigskip
+
+\begin{itemize}
+\item[-]
+$\sigma(K^*_D) \subset [-1/2,1/2]$
+\medskip
+
+\item[-]
+When $D$ is smooth (${\mathcal C}^{1,\a}$), 
+$K^*_D$ is compact consisting of a countable sequence of eigenvalues accumulating
+at $0$
+\medskip
+
+\item[-]
+When $D$ is Lipschitz, $K^*_D$ may have continous spectrum
+\end{itemize}
+ 
+}
+\end{frame}
+%%--------------------------------------------------------------------------------
+\begin{frame}
+\small{
+
+
+Goal in applications: tune the shape of $D$ to trigger 
+resonant frequencies at desired values of $\omega$
+
+\begin{figure}[hbt]
+\includegraphics[angle=0,height=20mm]{../Transp/foiltex/nanoparticles_2.jpg}
+\end{figure}
+\textcolor{red}{[Gang Bi et al, Optics Comm., 285 (2012) 2472]}
+\bigskip
+
+The Neumann-Poincar\'e operator naturally appears also in other 
+situations: cloaking, pointwise estimates on gradients of solutions to elliptic PDE's
+in composite media
+\medskip
+
+\textcolor{red}{[Ammari-Ciraolo-Kang-Lim, Perfekt-Putinar, Ola, Kang-Lim-Yu, EB-Triki]}
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+
+\textcolor{orange}{\Large{\bf 2. The Neumann-Poincar\'e operator/
+Poincar\'e variationnal problem
+for a periodic collection of inclusions}}
+
+\begin{figure}[hbt]
+\includegraphics[angle=0,width=45mm]{../Charles/NPoperator/setting}
+\end{figure}
+
+\vspace*{-14mm}
+\hspace*{80mm}$\omega \subset\subset Y$
+\vspace*{14mm}
+
+Consider $\Omega \subset \R^2$, smooth bounded domain, that contains
+a periodic collection of smooth inclusions 
+\textcolor{ox}{
+\begin{eqnarray*}
+D \;=\; \omega_\e \;=\; \cup_{i \in N_\e} (\omega_{\e,i})
+\quad\quad\quad
+\omega_{\e,i} = z_{\e,i} + \e \omega, \quad i \in N_{\e,i}
+\end{eqnarray*}}
+\medskip
+
+Model PDE : given $f \in L^2(\Omega)$, seek $u \in H^1_0(\Omega)$ such that
+\textcolor{ox}{
+\begin{eqnarray*}
+-\textrm{div}(A(x) \nabla u) &=& f \quad \textrm{in}\; \Omega,
+\quad\quad\quad
+A(x) =
+\left\{ \begin{array}{ll}
+k & \textrm{in}\; \omega_\e
+\\
+1 & \textrm{otherwise}
+\end{array} \right.
+\end{eqnarray*}}
+
+
+\textcolor{orange}{\bf What are the resonant frequencies of such a system ?
+Are there collective effects ?}
+\medskip
+
+\textcolor{orange}{\bf What is $\lim_{\e \to 0} \sigma(K^*_\e)$ ?}
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+As the definition of the Neumann-Poincar\'e depends on the number of inclusions,
+we work with the Poincar\'e variational operator
+
+\textcolor{ox}{
+\[
+T_{\e}~: H^1_0(\Omega) \rightarrow H^1_0(\Omega)
+\]}
+\vspace*{-5mm}
+
+\textcolor{ox}{
+\begin{eqnarray*}
+\forall\; v \in H^1_0(\Omega), \quad
+\int_\Omega \nabla T_\e u \cdot \nabla v
+&=&
+\int_{\omega_\e} \nabla u \cdot \nabla v
+\end{eqnarray*}}
+\bigskip
+
+If $\quad T_\e u \;=\; \beta u \quad$ for some $u \in H^1_0(\Omega)$ and $\beta \in \R$,
+then for any $v \in H^1_0(\Omega)$
+\textcolor{ox}{
+\begin{eqnarray*}
+\lefteqn{
+\ds\int_\Omega \nabla T_\e u \cdot \nabla v
+\;-\; \ds\int_{\omega_\e} \nabla u \cdot \nabla v
+\;=\; 
+\beta \ds\int_\Omega \nabla u \cdot \nabla v
+\;-\;\ds\int_{\omega_\e} \nabla u \cdot \nabla v}
+\\
+&=&
+\beta \ds\int_{\Omega \setminus \omega_\e} \nabla u \cdot \nabla v
++ \left(\beta -1 \right) \int_{\omega_\e} \nabla u \cdot \nabla v
+\;=\; 0
+\end{eqnarray*}}
+\medskip
+
+It follows that \textcolor{ox}{$\quad \textrm{div}(a(\beta) \nabla u) = 0$}
+\textcolor{ox}{
+\begin{eqnarray*}
+u = S_{\omega_\e}\vf &\textrm{with}&
+(\lambda I - K^*_{\omega_\e}) \vf \;=\; 0,
+\quad\quad\quad
+\lambda = 1/2 - \beta
+\end{eqnarray*}}
+
+
+We conclude that 
+\textcolor{b_bruz}{
+$\quad \sigma(T_\e) = 1/2 - \sigma(K^*_{\omega_\e})$ }
+
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+{\bf Theorem}
+\textcolor{b_bruz}{
+\begin{eqnarray*}
+\lim_{\e \to 0} \sigma(T_\e) &=&
+\{0,1\} \cup \sigma_{\textrm{Bloch}} \cup \sigma_{\partial \Omega}
+\end{eqnarray*}}
+\medskip
+
+\textcolor{b_bruz}{$\bullet$}
+The first term is the Bloch spectrum and corresponds to bulk
+resonant modes of single cells or group of cells
+\textcolor{b_bruz}{
+\begin{eqnarray*}
+\sigma_{\textrm{Bloch}} &=&
+\cup_{i \geq 1}
+[ \min_{\eta \in [0,1]^d} \lambda_i^-(\eta), 
+\max_{\eta \in [0,1]^d} \lambda_i^-(\eta) ]
+\cup
+[ \min_{\eta \in [0,1]^d} \lambda_i^+(\eta), 
+\max_{\eta \in [0,1]^d} \lambda_i^+(\eta) ]
+\end{eqnarray*}}
+\medskip
+
+where the operators $T_\eta$ are defined by
+\textcolor{b_bruz}{
+\begin{eqnarray*}
+\forall\; v \in H^1_{\#}(Y),
+\quad
+\ds\int_Y 
+\left( \nabla T_\eta u + 2 i \pi \eta T_\eta u \right)
+\cdot
+\overline{\left( \nabla v + 2 i \pi \eta v \right)}
+\;=\;
+\\
+\ds\int_\omega 
+\left( \nabla u + 2 i \pi \eta u \right)
+\cdot
+\overline{ \left(\nabla v + 2 i \pi \eta v \right) }, \quad \eta \neq 0
+\\
+\forall\; v \in H^1_{\#}(Y)/\R,
+\quad
+\ds\int_Y 
+\nabla T_0 u 
+\cdot
+\overline{\nabla v}
+\;=\; 
+\ds\int_\omega 
+\nabla u
+\cdot
+\overline{\nabla v}, \quad \eta = 0
+\end{eqnarray*}}
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+
+
+
+\textcolor{b_bruz}{$\bullet$}
+The boundary layer spectrum $\sigma_{\partial \Omega}$ is
+defined as the set of $\lambda \in (0,1)$ such that 
+\textcolor{b_bruz}{
+\begin{eqnarray*}
+\exists\; (\lambda_\e) \subset \sigma(T_\e) \quad\textrm{such that}\; \lambda_\e \to \lambda
+\end{eqnarray*}}
+\medskip
+
+and for which the associated eigenvectors $u_\e \in H^1_0(\Omega)$ satisfy
+\textcolor{b_bruz}{
+\begin{eqnarray*}
+\forall\; s > 0\quad 
+\lim_{\e \to 0}
+\e^{-(1 - 1/2 + s)} ||\nabla u_\e||_{L^2({\mathcal U}_\e)}
+&=& \infty
+\end{eqnarray*}}
+
+where 
+\begin{eqnarray*}
+{\mathcal U}_\e &=& \{ x \in \Omega, d(x, \partial \Omega) < \e\}
+\end{eqnarray*}
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+\vspace*{10mm}
+
+\textcolor{ox}{\bf Remarks~:} 
+\begin{itemize}
+\item[-]
+It is more convenient to work with $T_\e$ (domains of definition easier to handle)
+\medskip
+
+\item[-]
+Our work is largely inspired by the analysis of \textcolor{red}{[Allaire-Conca]}
+who studied the high frequency limit of spectra of diffusion equations using
+Bloch wave homogenization
+\medskip
+
+\item[-]
+As $\e \to 0$, the operators $T_\e$ converge to a limiting operator $T_\infty$
+defined on $H^1_0(\Omega)$ by
+\begin{eqnarray*}
+\forall\; v \in H^1_0(\Omega)\quad
+\ds\int_\Omega \nabla T_\infty u\cdot \nabla v
+&=&
+|\omega|
+\ds\int_\Omega \nabla u\cdot \nabla v
+\end{eqnarray*}
+
+However, the convergence is only in a weak sense, and thus does not yield any
+information on $\lim_{\e \to 0} \sigma(T_\e)$
+\medskip
+
+\item[-]
+To take into account the microscopic effects in the limit, we
+define a 2-scale version $\tilde{T}_\e$ of $T_\e$ on the larger
+space $L^2(\Omega, H^1(\omega)/\R)$, which has the same spectrum
+\medskip
+
+\item[-]
+We show that the operators $\tilde{T}_\e$ converge strongly to a
+limiting operator $\tilde{T}_0$, and thus
+\textcolor{red}{
+$\quad\quad \lim_{\e \to 0} \sigma(T_\e) \;\supset\; \sigma(\tilde{T}_0)$}
+\end{itemize}
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+\textcolor{ox}{\bf Key ingredient :}  
+\medskip
+
+2-scale convergence~\textcolor{red}{[Allaire, Nguetseng]}
+and the associated compactness properties
+\vspace*{5mm}
+
+{\bf Theorem~:} \quad Let $u_\e$ be a bounded sequence in $L^2(\Omega)$
+\medskip
+
+1. Then there exists $u_0 \in L^2(\Omega \times L^2_\#(Y))$ such that
+$u_\e$ 2-scale converges weakly to $u_0$, i.e.
+\textcolor{ox}{
+\begin{eqnarray*}
+\forall\; \phi \in L^2(\Omega, {\mathcal C}_\#(Y)), \quad
+\ds\int_\Omega u_\e(x) \phi(x, x/\e) \,dx
+&\rightarrow&
+\ds\int_{\Omega \times Y}
+u_0(x,y) \phi(x,y)\, dxdy
+\end{eqnarray*}}
+\vspace*{5mm}
+
+%%2. Assume further that 
+%%\textcolor{ox}{
+%%\begin{eqnarray*}
+%%||u_\e||_{L^2(\Omega)} &\rightarrow& ||u_0||_{L^2(\Omega \times Y)}
+%%\end{eqnarray*}}
+%%Then $u_\e$ 2-scale converges strongly, i.e., for any sequence $v_\e$
+%%that 2-scale converges weakly to $v_0 \in L^2(\Omega \times L^2_\#(Y))$
+%%\textcolor{ox}{
+%%\begin{eqnarray*}
+%%\forall\; \phi \in {\mathcal C}(\overline{\Omega}, {\mathcal C}_\#(Y)), \quad
+%%\ds\int_\Omega u_\e(x) v_\e(x) \phi(x,x/\e) \,dx
+%%&\rightarrow&
+%%\ds\int_{\Omega \times Y}
+%%u_0(x,y) v_0(x,y)\phi(x,y)\, dxdy
+%%\end{eqnarray*}}
+%%
+%%
+%%}
+%%\end{frame}
+%------------------------------------------------------------
+%%\begin{frame}
+%%\small{
+
+2. Assume that a sequence $(u_\e)$ converges weakly in $L^2$ to some
+$u_0 \in H^1(\Omega)$. Then there exists $\hat{u} \in L^2(\Omega,H^1_\#(Y)/\R)$ 
+such that, up to a subsequence
+\medskip
+
+\begin{itemize}
+\item[-]
+$u_\e$ 2-scale converges to $u$
+\medskip
+
+\item[-]
+$\nabla u_\e$ 2-scale converges to $\nabla u_0(x) + \nabla_y \hat{u}(x,y)$
+\end{itemize}
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+\textcolor{orange}{\Large{\bf 3. Bloch wave homogenization}}
+\vspace*{1cm}
+
+Following \textcolor{red}{[Allaire-Conca] (see also [Cioranescu-Damlamian-Griso])}
+we define
+\medskip
+
+\begin{itemize}
+\item[-]
+an extension operator $E_\e~: L^2(\Omega) \longrightarrow L^2(\Omega \times Y)$
+\textcolor{ox}{
+\begin{eqnarray*}
+E_\e u(x,y) &=&
+\left\{ \begin{array}{cl}
+u(\e [x/\e] + \e y) &\textrm{if $x \in \omega_{\e,i} \subset \Omega$}
+\\
+\\
+0 & \textrm{otherwise}
+\end{array} \right.
+\end{eqnarray*}}
+\medskip
+
+\item[-]
+a projection operator $P_\e~: L^2(\Omega \times Y) \longrightarrow L^2(\Omega)$
+\textcolor{ox}{
+\begin{eqnarray*}
+P_\e \phi(x) &=&
+\left\{ \begin{array}{cl}
+\ds\int_Y \phi( \e [x/\e] + \e z, \{x/e\} )\, dz 
+&\textrm{if $x \in \omega_{\e,i} \subset \Omega$}
+\\
+\\
+0 & \textrm{otherwise}
+\end{array} \right.
+\end{eqnarray*}}
+\end{itemize}
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+Denoting $\Omega_\e$ the union of all the cells $\omega_{\e,i}$ that are
+fully contained in $\Omega$
+\bigskip
+
+
+\begin{itemize}
+\item[$\bullet$]
+$E_\e$ and $P_\e$ are bounded operators with norm 1
+\medskip
+
+\item[$\bullet$] $P_\e : L^2(\Omega \times Y) \rightarrow L^2(\Omega)$ 
+and $E_\e : L^2(\Omega) \rightarrow L^2(\Omega \times Y)$
+are \textcolor{b_bruz}{adjoint operators}
+\medskip
+
+\item[$\bullet$] $P_\e$ and $E_\e$ are \textcolor{b_bruz}{almost inverse} 
+to one another
+
+for $u \in L^2(\Omega)$, \quad
+\textcolor{ox}{
+$P_\e E_\e u(x) \;=\; 
+\left\{ \begin{array}{cl}
+u(x) & \textrm{if}\; x \in \Omega_\e
+\\
+0 & \textrm{otherwise}
+\end{array} \right.$}
+\medskip
+
+for $\phi \in L^2(\Omega \times Y)$, 
+\textcolor{ox}{ \quad $E_\e P_\e \phi \rightarrow \phi$
+strongly in $L^2(\Omega \times Y)$}
+\end{itemize}
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+In our setting, we should be cautious as the definition of $T_\e$ 
+involves derivatives, whereas the operators $E_\e, P_\e$ may not
+define functions in $H^1$
+\bigskip
+
+\textcolor{red}{We set $\quad \tilde{T}_\e := E_\e \, T^\circ_\e \, P_\e \quad$} with
+\medskip
+
+\begin{eqnarray*}
+\tilde{T}_\e~: L^2(\Omega, H^1(\omega)/\R) &\longrightarrow & L^2(\Omega, H^1(\omega)/\R)
+\\
+P_\e \;\downarrow && \uparrow \; E_\e
+\\
+{T^\circ_\e}~: H_\e := H^1(\omega_\e)/C(\omega_\e) &\longrightarrow& H_\e 
+\\
+\downarrow && \uparrow 
+\\
+T_\e~: H^1_0(\Omega) &\longrightarrow& H^1_0(\Omega)
+\end{eqnarray*}
+\bigskip
+
+where \textcolor{red}{$C(\omega_\e) \;=\; 
+\{ u \in H^1_0(\Omega),  \;\; u = (\textrm{const})_i \;\textrm{on}\; \omega_{\e,i} \}$}
+\medskip
+
+
+\textcolor{gray}{
+\[ \begin{array}{l}
+\phi \in L^2(\Omega \times H^1(\omega)/\R)
+\;\rightarrow\;
+P_\e \phi := u_\e \in H^1(\omega_\e)/C(\omega_\e)
+\\
+\rightarrow \; v_\e \in H^1_0(\Omega), \quad \textrm{such that} \quad
+\ds\int_\Omega \nabla v_\e \cdot \nabla v \;=\; \ds\int_{\omega_\e} \nabla u_\e \cdot \nabla v
+\\
+\rightarrow\; \tilde{T}_\e \phi = E_\e v_\e|_{\Omega \times \omega}
+\end{array}
+\]}
+
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+{\bf Proposition}
+\medskip
+
+\begin{itemize}
+\item[$\bullet$]
+$\tilde{T}_\e$ is self-adjoint and \quad
+$\sigma(\tilde{T}_\e) \;=\; \sigma(T_\e) \setminus \{0\}$
+\bigskip
+
+\item[$\bullet$]
+For any $\phi \in L^2(\Omega, H^1(\omega)/\R)$, $\tilde{T}_\e \phi$
+\textcolor{b_bruz}{converges strongly} in $L^2(\Omega, H^1(\omega)/\R)$ to some $\tilde{T}_0 \phi$
+\medskip
+
+$\tilde{T}_0 \phi = Q \hat{v}$ where 
+$Q~: L^2(\Omega, H^1_\#(Y)/\R) \longrightarrow L^2(\Omega, H^1(\omega)/\R)$
+is the restriction operator and $\hat{v}$ is the unique solution in 
+$L^2(\Omega, H^1_\#(Y)/\R)$ of
+\textcolor{b_bruz}{
+\begin{eqnarray*}
+- \Delta_y \hat{v}(x,y) &=&
+- \textrm{div}_y(1_\omega(y) \nabla_y \phi)(x,y)
+\quad\quad \textrm{in}\; Y, \;a.e. \;x \in \Omega
+\end{eqnarray*}}
+
+\item[$\bullet$] It follows that
+\textcolor{b_bruz}{
+$\quad \lim_{\e \to 0} \sigma(T_\e) \supset \sigma(\tilde{T}_0)$}
+\bigskip
+
+\item[$\bullet$] Actually, $\sigma(\tilde{T}_0) = \sigma(T_0) \setminus\{0\}$, 
+where $T_0~: H^1_\#(Y)/\R \longrightarrow H^1_\#(Y/\R)$ is defined by
+\textcolor{b_bruz}{
+\begin{eqnarray*}
+\forall\; v \in H^1_\#(Y), \quad
+\ds\int_Y \nabla T_0 u \cdot \nabla v
+&=&
+\ds\int_\omega \nabla u \cdot \nabla v
+\end{eqnarray*}}
+\end{itemize}
+The values in $\sigma(T_0)$ can be interpreted 
+as eigenvalues of single-cell resonant modes
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+This follows from the compactness induced by 2-scale convergence~:
+\medskip
+
+\textcolor{b_bruz}{
+\[ \begin{array}{l}
+\phi \in L^2(\Omega \times H^1(\omega)/\R)
+\;\rightarrow\;
+P_\e \phi := u_\e \in H^1(\omega_\e)/C(\omega_\e)
+\\
+\rightarrow \; v_\e \in H^1_0(\Omega), \quad \textrm{such that} \quad
+\ds\int_\Omega \nabla v_\e \cdot \nabla v \;=\; \ds\int_{\omega_\e} \nabla u_\e \cdot \nabla v
+\\
+\rightarrow\; \tilde{T}_\e \phi = E_\e v_\e|_{\Omega \times \omega}
+\end{array}
+\]}
+
+then 
+
+\[
+\left\{
+\begin{array}{lcll}
+\e v_\e & \rightharpoonup & v_0 &\quad \textrm{weakly in}\; H^1_0(\Omega)
+\\
+\e E_\e(\nabla v_\e) &\rightharpoonup & \nabla v_0 + \nabla_y \hat{v}
+&\quad \textrm{weakly in}\; L^2(\Omega \times Y)
+\end{array} \right. 
+\]
+\begin{eqnarray*}
+\ds\int_{\Omega \times Y}
+(\nabla v_0 + \nabla_y \hat{v}) \cdot (\nabla \phi + \nabla_y \psi)
+&=&
+\ds\int_{\Omega \times \omega}
+\nabla_y \phi(x,y) \cdot (\nabla \phi + \nabla_y \psi)
+\end{eqnarray*}
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+\textcolor{ox}{\bf Collective resonances of the inclusions}
+\vspace*{5mm}
+
+The rescaling procedure can also be performed on a pack of cells
+(i.e. over $K^d$ copies of the unit cell $Y$)
+\medskip
+
+\begin{itemize}
+\item[-] define corresponding projection and extension operators
+$E_\e^K, P_\e^K$
+\medskip
+
+\item[-] define $\tilde{T}_\e^K$ 
+\medskip
+
+\item[-]
+show that $\tilde{T}_\e^K$ converges strongly to a limiting operator $\tilde{T}_0^K$
+\medskip
+
+\item[-]
+whose spectrum coincides with that of 
+$T_0^K~: H^1_\#(KY)/\R \longrightarrow H^1_\#(KY)/\R$
+defined by
+\textcolor{ox}{
+\begin{eqnarray*}
+\forall\; v \in H^1_\#(KY), \quad
+\ds\int_{KY} \nabla T_0 u \cdot \nabla v
+&=&
+\ds\int_{\omega^K} \nabla u \cdot \nabla v
+\end{eqnarray*}}
+\medskip
+
+\item[-] and in fact
+\textcolor{ox}{
+$\quad \sigma(T_0^K) \;=\;\ \cup_{0 \leq j \leq K-1} \sigma(T_{\eta})
+\quad\quad \eta = j/K $}
+\end{itemize}
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+\textcolor{orange}{\bf{\Large 4. Homogenization with NIM's }}
+\bigskip
+
+
+Let $f \in L^2(\Omega)$ and consider $u_\e \in H^1_0(\Omega)$ solution to
+\textcolor{red}{
+\begin{eqnarray*}
+(P_\e) \quad\quad
+- \textrm{div}(A_\e(x) \nabla u_\e(x)) &=& f 
+\quad\quad \textrm{in}\; \Omega
+\end{eqnarray*}}
+
+where $A_\e(x) \;=\; \left\{ \begin{array}{ll}
+\textcolor{red}{a > 0} & x \in \omega_\e
+\\
+1 & \textrm{otherwise}
+\end{array} \right.$
+\medskip
+
+Then $u_\e \rightharpoonup u_*$ weakly in $H^1_0(\Omega)$, with
+\textcolor{red}{
+\begin{eqnarray*}
+(P_*) \quad\quad
+- \textrm{div}(A_* \nabla u_*(x)) &=& f 
+\quad\quad \textrm{in}\; \Omega
+\end{eqnarray*}}
+\medskip
+
+$A_*$ is a (constant) matrix, whose entries
+are given in terms of the solutions to the cell problems~: 
+find $\chi_j \in H^1_\#(Y)/\R$ such that
+\textcolor{red}{
+\begin{eqnarray*}
+- \textrm{div}(A(y)\nabla(\chi_j(x) + y_j)) &=& 0 
+\quad\quad \textrm{in}\; Y
+\end{eqnarray*}}
+\medskip
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+What happens in the more general case when $a \in {\mathbb C}$ ?
+\medskip
+
+\textcolor{red}{[Bouchitt\'e-Bourel-Feldbacq, Hoai-Minh Nguyen,
+Bunoiu-Ramdani,...]}
+\bigskip
+
+Note that if $\lambda = 1/(1-a)$ is not in the spectrum of $T_0~: H^1_\#(y) \rightarrow H^1_\#(Y)$
+\begin{eqnarray*}
+\forall\; v \in H^1_\#(Y) \quad
+\ds\int_Y \nabla T_0u \cdot \nabla v
+&=& \ds\int_\omega \nabla u \cdot \nabla v
+\end{eqnarray*}
+
+the homogenized tensor is formally well defined
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+\textcolor{ox}{\bf Prop.}
+\medskip
+
+Let $f \in H^{-1}(\Omega)$. Assume that 
+$\lambda = 1/(1-a) \notin \sigma(T_0)$ so that $A^*$ is well defined
+\medskip
+
+\begin{itemize}
+\item[-] 
+If $u_\e$ is a sequence of solutions to $(P_\e)$
+such that \textcolor{ox}{$u_\e \to u$} weakly in $H^1$, then 
+$u$ is a solution to $(P_*)$
+\medskip
+
+\item[-]
+If $u$ is a solution to $(P_*)$ (if any), then there exists a sequence
+$(f_\e) \subset H^{-1}(\Omega), f_\e \to f$ such that 
+the solutions $u_\e \in H^1_0(\Omega)$ to
+\textcolor{ox}{
+\begin{eqnarray*}
+- \textrm{div}(A_\e \nabla u_\e) &=& f_\e \quad \textrm{in}\; \Omega
+\end{eqnarray*}}
+satisfy \textcolor{ox}{$u_\e \rightharpoonup u$ weakly in $H^1(\Omega)$}
+\end{itemize}
+\bigskip
+
+\textcolor{gray}{In particular, homogenization cannot discriminate
+among solutions to the homogenized equation, if they are not unique}
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+We can then relate (partially) the limiting spectrum with 
+the homogenization tensor
+\bigskip
+
+\textcolor{ox}{\bf Prop.}
+\medskip
+
+Let $a \in {\mathbb C} \setminus \sigma(T_0)$ and let $A_*$ denote the
+associated homogenized matrix
+\medskip
+
+Assume that there exists $f \in H^{-1}(\Omega)$ such that the PDE
+\textcolor{ox}{
+\begin{eqnarray*}
+- \textrm{div}(A^* \nabla u) &=& f \quad\quad \textrm{in}\; \Omega
+\end{eqnarray*}}
+does not have a solution in $H^1_0(\Omega)$
+\medskip
+
+Then \textcolor{ox}{$\quad 1/(1-a) \in \lim_{\e \to 0} \sigma(T_\e)$}
+\bigskip
+
+\textcolor{b_bruz}{The converse is false: the case of rank-one laminates
+shows that the above system can be well-posed when a is in
+the limiting spectrum}
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+\textcolor{ox}{\bf{\Large High contrast ($a \to \pm \infty$ or $a \to 0$)}}
+\vspace*{10mm}
+
+Recall that we assumed that $\omega \subset\subset Y$
+\medskip
+
+{\bf Prop.} 
+
+There exists $-\infty < c < C < 0$ such that
+if $\quad -\infty < a < c \quad$ or if $\quad C < a < 0$
+\medskip
+
+\begin{itemize}
+\item[\textcolor{b_bruz}{$\bullet$}]
+($P_\e$) is well posed and its solution $u_\e$ depends continuously on $f$
+\medskip
+
+\item[\textcolor{b_bruz}{$\bullet$}]
+The homogenized tensor $A^*$ is elliptic (uniform bounds
+wrt $a$)
+\medskip
+
+In particular the homogenized problem $(P_*)$ is well-posed.
+\end{itemize}
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+\textcolor{b_bruz}{\bf{\Large 5. Conclusion/perspectives}}
+\vspace*{10mm}
+
+\begin{itemize}
+\item[-]
+Does the Bloch spectrum really play a role wrt resonance ?
+\medskip
+
+\item[-]
+How to better characterize the boundary spectrum
+\medskip
+
+\item[-]
+What if the inclusions are not smooth ?
+\medskip
+
+\item[-]
+The hypothesis $\omega \subset\subset Y$ plays an important 
+role. Laminates provide counter-examples to some of the properties
+we derived
+\medskip
+
+\item[-]
+Is it possible to construct hyperbolic media under the
+hypothesis that $\omega \subset\subset Y$ ?
+\end{itemize}
+
+}
+\end{frame}
+%------------------------------------------------------------
+\begin{frame}
+\small{
+
+\begin{figure}[hbt]
+\hfill
+\includegraphics[angle=0,width=30mm]{../Incl/incl_nontouch_3.jpg}
+\end{figure}
+\vspace*{-2cm}
+
+
+}
+\end{frame}
+
+
+%%--------------------------------------------------------------------------------
+\end{document}
+%%--------------------------------------------------------------------------------
+
+
+
+
+
