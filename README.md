@@ -10,36 +10,25 @@ After being explained some of the basic notions of LaTeX, we were asked to prepa
 
 PDF generated from LaTeX file can be found at [archit_presentation.pdf](./archit_presentation.pdf).
 
-<style>
-.project td
-{
-  background: black;
-  border: 1px solid gray;
 
-  width:300px;
-  overflow:hidden;
-  word-wrap:break-word;
-}
-</style>
-
-<table align=left class="project">
+<table align=left>
   <tbody>
     <tr>
       <!-- Cell 1 -->
       <td style="text-align: center; vertical-align: middle;"><br>
       <img src="./images/archit_presentation-1.png">
       <br></td>
-      <!-- Cell 1 -->
+      <!-- Cell 2 -->
       <td style="text-align: center; vertical-align: middle;"><br>
       <img src="./images/archit_presentation-2.png">
       <br></td>
     </tr>
     <tr>
-      <!-- Cell 1 -->
+      <!-- Cell 3 -->
       <td style="text-align: center; vertical-align: middle;"><br>
       <img src="./images/archit_presentation-3.png">
       <br></td>
-      <!-- Cell 1 -->
+      <!-- Cell 4 -->
       <td style="text-align: center; vertical-align: middle;"><br>
       <img src="./images/archit_presentation-4.png">
       <br></td>
